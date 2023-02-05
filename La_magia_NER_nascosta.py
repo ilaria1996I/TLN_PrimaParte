@@ -25,6 +25,7 @@ tag_che_precede_tag, tag_della_parola,prob_word_given_tag, prob_tag_given_pred_t
 #parole sconosciute
 ipotesiDiSmothing1,ipotesiDiSmothing2,ipotesiDiSmothing3,ipotesiDiSmothing4 = faseDiSmoothing.paroleSconosciute(dict(),dict(),dict(),pathTest,prob_word_given_tag, tag_che_precede_tag.keys(),pathVal,prob_word_given_tag, tag_che_precede_tag)
 
+#fase di decoding
 corpusAlgoritmo.decoding(pathTest, tag_della_parola, prob_tag_given_pred_tag, prob_word_given_tag, ipotesiDiSmothing1, ipotesiDiSmothing2, ipotesiDiSmothing3, ipotesiDiSmothing4,False)
 
 condizione = True
