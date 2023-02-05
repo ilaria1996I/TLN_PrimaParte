@@ -15,28 +15,24 @@ def smoothingFour(parola_count,tag_count,tag_count_by_parola,ipotesiDiSmothing4,
     
     n_parole = 0
     for tag in tags:
-            tag_count[tag] = 0
+        tag_count[tag] = 0
     with open(pathVal, 'r', encoding='utf-8')  as val:
         for line in val:
-            parola, tag = takeWordAndTag(line)
-            if parola!=False and tag!=False:
+            parola, tag = takeWordAndTag(line) #se inizia con un digit vado al passo successivo
+            if parola!=False and tag!=False: 
                 if parola not in parola_count:                  
                     parola_count[parola] = 1 
                     tag_count_by_parola[parola] = dict()              
                     tag_count_by_parola[parola][tag] = 1
                 else:
                     parola_count[parola] += 1
-                    if tag not in tag_count_by_parola[parola]:
-                        tag_count_by_parola[parola][tag] =1
-                    else:
-                        tag_count_by_parola[parola][tag] +=1
+                    if tag not in tag_count_by_parola[parola]:tag_count_by_parola[parola][tag] =1
+                    else:tag_count_by_parola[parola][tag] +=1
         
         for parola in parola_count.keys():
             for tag in tag_count_by_parola[parola].keys():
-                if parola_count[parola] == 1:
-                    tag_count[tag] += tag_count_by_parola[parola][tag]
-            if parola_count[parola] == 1:
-                n_parole += 1
+                if parola_count[parola] == 1: tag_count[tag] += tag_count_by_parola[parola][tag]
+            if parola_count[parola] == 1: n_parole += 1
                     
     with open(pathTest, 'r', encoding='utf-8')  as test:
         for line in test:
@@ -49,7 +45,7 @@ def smoothingFour(parola_count,tag_count,tag_count_by_parola,ipotesiDiSmothing4,
                         if tag != 'LAST':
                             if(tag_count[tag] > 0):
                                 ipotesiDiSmothing4[parola][tag] = math.log(
-                                tag_count[tag]/n_parole)
+                                    tag_count[tag]/n_parole)
     return ipotesiDiSmothing4   
 
 def paroleSconosciute(ipotesiDiSmothing1,ipotesiDiSmothing2,ipotesiDiSmothing3,pathTest,emission, tags,pathVal,prob_word_given_tag, tag_che_precede_tag):
